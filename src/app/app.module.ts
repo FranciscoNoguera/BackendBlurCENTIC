@@ -1,11 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
-import { FormsModule } from '@angular/forms'
-
+import { FormsModule } from '@angular/forms';
+import { ApiConectionService } from './services/ApiConectionService/api-conection-service.service';
 
 @NgModule({
   declarations: [
@@ -14,7 +12,8 @@ import { FormsModule } from '@angular/forms'
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    ApiConectionService
   ],
   providers: [],
   bootstrap: [AppComponent]
