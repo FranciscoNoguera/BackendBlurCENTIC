@@ -16,7 +16,7 @@ export class ApiConectionService {
     /*
     Esta función autentica al usuario frente al API.
     */
-    let messageHeader = new HttpHeaders({ 'Contnet-Type': 'application/json' });
+    let messageHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
     let credentials = { "user": user, "password": password }
     let messageBody = JSON.stringify(credentials);
 

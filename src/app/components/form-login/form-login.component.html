@@ -10,9 +10,9 @@
     </form>-->
     <!-- Formulario de inicio de sesión -->
     <form class="login-form">
-      <input type="text" placeholder="Usuario" name="user" id="user" [(ngModel)]="user" >
-      <input type="password" placeholder="Contraseña" id="password" [(ngModel)]="password" >
-      <button (click)="onLogInClick">Iniciar sesión</button>
+      <input type="text" placeholder="Usuario" name="user" [(ngModel)]="user" >
+      <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" >
+      <button (click)="onLogInClick()">Iniciar sesión</button>
       <p class="message">¿No estás registrado? <a href="#">Crea una cuenta</a></p>
     </form>
   </div>
