@@ -6,18 +6,11 @@
 import { Injectable, NgModule } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
-
-/*const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
-}*/
 
 @Injectable()
 export class ApiConectionService {
   
   constructor( private http: HttpClient ) { }
-
-  //constructor( private http: HttpClient, private router: Router ) { }
 
   logIn( user, password ) {
     /*
@@ -38,8 +31,7 @@ export class ApiConectionService {
     if(localStorage.getItem('userToken')) {
       return true;
     } else {
-      //Devolver a la página de logIn no se ha impementado todavía. Debería ser algo así.
-      //this.router.navigate(['/login']);
+      //Devolver a la página de logIn no se ha impementado todavía.
       return false;
     }
 

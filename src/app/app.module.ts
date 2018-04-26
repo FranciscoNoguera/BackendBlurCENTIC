@@ -5,6 +5,8 @@ import { FormLoginComponent } from './components/form-login/form-login.component
 import { FormsModule } from '@angular/forms';
 import { ApiConectionService } from './services/ApiConectionService/api-conection-service.service';
 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -12,10 +14,13 @@ import { ApiConectionService } from './services/ApiConectionService/api-conectio
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ApiConectionService
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    ApiConectionService,
+    HttpClient,
+    HttpHeaders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

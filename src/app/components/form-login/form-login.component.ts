@@ -5,9 +5,10 @@
  * @version 1.0
  */
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+//import { ActivatedRoute, Router } from '@angular/router';
 import {ApiConectionService} from '../../services/ApiConectionService/api-conection-service.service';
 import {Observable} from 'rxjs/Rx';
+//import { error } from 'protractor';
 
 @Component({
   selector: 'app-form-login',
@@ -33,13 +34,12 @@ export class FormLoginComponent implements OnInit {
     Tras esto redirigirá al menú de gestión.
     */
     this.apiConectionService.logIn( this.user, this.password ).subscribe(
-      data => {let token = data['token'];
-      localStorage.setItem('userToken',token);
+      data => {
+        let token = data['token'];
+        localStorage.setItem('userToken',token);
       //La redirección al menú de gestión aún no está implementada.
-      //this.router.navigate(["/menu"]);
-      }
+      } //Necesario recoger un error.
     );
-    
   }
 
 }
