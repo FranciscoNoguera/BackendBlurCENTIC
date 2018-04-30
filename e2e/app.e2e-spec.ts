@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('gestor-juego App', () => {
+describe('backend-blur-centic App', () => {
   let page: AppPage;
 
   beforeEach(() => {

@@ -5,10 +5,8 @@
  * @version 1.0
  */
 import { Component, OnInit } from '@angular/core';
-//import { ActivatedRoute, Router } from '@angular/router';
 import {ApiConectionService} from '../../services/ApiConectionService/api-conection-service.service';
 import {Observable} from 'rxjs/Rx';
-//import { error } from 'protractor';
 
 @Component({
   selector: 'app-form-login',
@@ -16,7 +14,7 @@ import {Observable} from 'rxjs/Rx';
   styleUrls: ['./form-login.component.css']
 })
 export class FormLoginComponent implements OnInit {
-  //En nuestro caso para conectarnos usaremos ucam1 & vfMm37
+  //En nuestro caso para conectarnos usaremos ucam1 & zvfMm37
   public user;
   public password;
 
@@ -33,13 +31,8 @@ export class FormLoginComponent implements OnInit {
     Una vez autenticado el usuario creará un token de usuario en memoria.
     Tras esto redirigirá al menú de gestión.
     */
-    this.apiConectionService.logIn( this.user, this.password ).subscribe(
-      data => {
-        let token = data['token'];
-        localStorage.setItem('userToken',token);
-      //La redirección al menú de gestión aún no está implementada.
-      } //Necesario recoger un error.
-    );
+    this.apiConectionService.logIn( this.user, this.password );
+    this.apiConectionService.isLoggedIn();
   }
 
 }

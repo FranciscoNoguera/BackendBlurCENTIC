@@ -4,23 +4,27 @@
  * @version 1.0
  */
 import { Injectable, NgModule } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Http, Headers, Response } from '@angular/http';
 
 @Injectable()
 export class ApiConectionService {
   
-  constructor( private http: HttpClient ) { }
+  constructor( private http: Http ) { }
 
-  logIn( user, password ) {
+  logIn( user: String, password: String ) {
     /*
     Esta función autentica al usuario frente al API.
     */
-    let messageHeader = new HttpHeaders({ 'Content-Type': 'application/json' });
+    let messageHeader = new Headers();
+    messageHeader.append('Content-Type', 'application/json' );
     let credentials = { "user": user, "password": password }
     let messageBody = JSON.stringify(credentials);
 
-    return this.http.post('https://gameserver.centic.ovh/auth/login', messageBody, { headers: messageHeader });
+    this.http.post('https://gameserver.centic.ovh/auth/login', messageBody, { headers: messageHeader })
+      .subscribe( info => {
+        localStorage.setItem('userToken', info ['token']);
+      });
   }
 
   isLoggedIn() {
@@ -42,6 +46,15 @@ export class ApiConectionService {
     Esta función cierra la sesión de un usuario previamente autenticado. Para esto 
     elimina el token de usuario almacenado en meemoria
     */
-     localStorage.removeItem('userToken');  }
+     localStorage.removeItem('userToken');
+  }
+
+  /*uploadImage() {
+    let userToken = localStorage.getItem('userToken');
+    //let authorization = "Bearer " + userToken;
+    let messageHeader = new Headers();
+    messageHeader.append('Content-Type', 'application/json' );
+    messageHeader.append('Authorization',"Bearer " + userToken);
+  }*/
 
 }
