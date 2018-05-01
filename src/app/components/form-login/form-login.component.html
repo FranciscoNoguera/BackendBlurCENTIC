@@ -1,19 +1,10 @@
 <div class="login-page">
   <div class="form">
-    <!-- Formulario de creación de cuenta -->
-    <!--<form class="register-form">
-      <input type="text" placeholder="name"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form>-->
-    <!-- Formulario de inicio de sesión -->
     <form class="login-form">
       <input type="text" placeholder="Usuario" name="user" [(ngModel)]="user" >
       <input type="password" placeholder="Contraseña" name="password" [(ngModel)]="password" >
       <button (click)="onLogInClick()">Iniciar sesión</button>
-      <p class="message">¿No estás registrado? <a href="#">Crea una cuenta</a></p>
+      <p class="message" *ngIf="logInState == false" >Credenciales erroneos</p>
     </form>
   </div>
 </div>

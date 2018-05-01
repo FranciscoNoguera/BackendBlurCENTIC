@@ -25,6 +25,7 @@ export class ApiConectionService {
       .subscribe( info => {
         localStorage.setItem('userToken', info ['token']);
       });
+      //Llevar a la página de control.
   }
 
   isLoggedIn() {
@@ -49,12 +50,19 @@ export class ApiConectionService {
      localStorage.removeItem('userToken');
   }
 
-  /*uploadImage() {
-    let userToken = localStorage.getItem('userToken');
-    //let authorization = "Bearer " + userToken;
+  uploadImage(imageName: String, imageURL:String) {
     let messageHeader = new Headers();
     messageHeader.append('Content-Type', 'application/json' );
-    messageHeader.append('Authorization',"Bearer " + userToken);
-  }*/
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userToken'));
+
+    let messageBody = {
+      "name": imageName,
+      "image": imageURL
+    }
+    this.http.post( 'https://gameserver.centic.ovh/games/items/', JSON.stringify(messageBody), { headers: messageHeader })
+    .subscribe( info => {
+      console.log(info);
+    });
+  }
 
 }

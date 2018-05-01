@@ -17,8 +17,8 @@ export class FormLoginComponent implements OnInit {
   //En nuestro caso para conectarnos usaremos ucam1 & zvfMm37
   public user;
   public password;
+  public logInState: boolean = true;
 
-  //constructor(){}
   constructor( private apiConectionService: ApiConectionService ) { }
   //constructor( private router: Router, private apiConectionService: ApiConectionService ) { }
 
@@ -32,7 +32,8 @@ export class FormLoginComponent implements OnInit {
     Tras esto redirigirá al menú de gestión.
     */
     this.apiConectionService.logIn( this.user, this.password );
-    this.apiConectionService.isLoggedIn();
+    if( this.apiConectionService.isLoggedIn() == false ){
+      this.logInState = false;
+    }
   }
-
 }
