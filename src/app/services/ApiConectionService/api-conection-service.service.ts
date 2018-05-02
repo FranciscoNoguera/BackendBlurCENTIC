@@ -63,6 +63,8 @@ export class ApiConectionService {
 //La petición que tenéis que usar es Put Item la tenéis descrita en el Postman
 //He dejado ya terinados la cabecera y el cuerpo del mensaje.
 //Esta petición devuelve una URL que teneís que recoger y de la que se debe de hacer un return.
+//También será necesario que le suministreis la imágen por parámetro a la función. Y es posible que para subirla al api tengais que convertirla a texto.
+//Buscad en google "Upload image to a restful api" y saldrá mucha documentación
 
     /* Esto es un ejemplo de como se tiene que hacer la petición
     this.http.post( 'https://gameserver.centic.ovh/games/items/', JSON.stringify(messageBody), { headers: messageHeader })
