@@ -17,7 +17,7 @@ export class ApiConectionService {
     Esta función autentica al usuario frente al API.
     */
     let messageHeader = new Headers();
-    messageHeader.append('Content-Type', 'application/json' );
+    messageHeader.append( 'Content-Type', 'application/json' );
     let credentials = { "user": user, "password": password }
     let messageBody = JSON.stringify(credentials);
 
@@ -50,19 +50,30 @@ export class ApiConectionService {
      localStorage.removeItem('userToken');
   }
 
-  uploadImage(imageName: String, imageURL:String) {
+  uploadImage(imageName: String): String {
     let messageHeader = new Headers();
     messageHeader.append('Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userToken'));
 
-    let messageBody = {
-      "name": imageName,
-      "image": imageURL
+     let messageBody = {
+      "publish": false,
+      "name": imageName
     }
+
+//La petición que tenéis que usar es Put Item la tenéis descrita en el Postman
+//He dejado ya terinados la cabecera y el cuerpo del mensaje.
+//Esta petición devuelve una URL que teneís que recoger y de la que se debe de hacer un return.
+
+    /* Esto es un ejemplo de como se tiene que hacer la petición
     this.http.post( 'https://gameserver.centic.ovh/games/items/', JSON.stringify(messageBody), { headers: messageHeader })
     .subscribe( info => {
       console.log(info);
     });
+    En este caso tendreis que hacer un put, por lo que será algo más así
+    this.http.put(Parametros).subscribe( info => {
+    })
+    */
+    return "url devuelta por la petición";
   }
 
 }
