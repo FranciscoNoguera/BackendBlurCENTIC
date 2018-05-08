@@ -6,11 +6,13 @@
 import { Injectable, NgModule } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers, Response } from '@angular/http';
+import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class ApiConectionService {
   
-  constructor( private http: Http ) { }
+  constructor( private http: Http, private router: Router ) { }
 
   logIn( user: String, password: String ) {
     /*
@@ -27,6 +29,7 @@ export class ApiConectionService {
         localStorage.setItem('userTokenBlurCentic', info ['token']);
       });
       //Llevar a la página de control.
+      this.router.navigateByUrl('home');
   }
 
   isLoggedIn() {
