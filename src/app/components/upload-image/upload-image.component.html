@@ -1,0 +1,12 @@
+
+<div class="login-page">
+    <div class="form">
+        <input type="text" placeholder="Nombre imágen" name="name" [(ngModel)]="name"/>
+        
+        <input type = "file" name= "imageFile" file-model = "myFile"/>
+        <button (click) = "uploadImage(imageFile)">
+            <span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen
+        </button>
+    </div>
+</div>
+

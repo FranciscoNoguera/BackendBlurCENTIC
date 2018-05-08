@@ -22,8 +22,9 @@ export class ApiConectionService {
     let messageBody = JSON.stringify(credentials);
 
     this.http.post('https://gameserver.centic.ovh/auth/login', messageBody, { headers: messageHeader })
-      .subscribe( info => {
-        localStorage.setItem('userToken', info ['token']);
+    .map(response => response.json()).subscribe( info => {
+        console.log("Token:", info);
+        localStorage.setItem('userTokenBlurCentic', info ['token']);
       });
       //Llevar a la página de control.
   }
@@ -33,7 +34,7 @@ export class ApiConectionService {
     Esta función comprueba si un usuario se encuentra autenticado. En caso afirativo
     devolverá true. En caso negativo false y redirigirá a la página de registro.
     */
-    if(localStorage.getItem('userToken')) {
+    if(localStorage.getItem('userTokenBlurCentic')) {
       return true;
     } else {
       //Devolver a la página de logIn no se ha impementado todavía.
@@ -47,13 +48,18 @@ export class ApiConectionService {
     Esta función cierra la sesión de un usuario previamente autenticado. Para esto 
     elimina el token de usuario almacenado en meemoria
     */
-     localStorage.removeItem('userToken');
+     localStorage.removeItem('userTokenBlurCentic');
   }
 
   uploadImage(imageName: String): String {
+
     let messageHeader = new Headers();
+    let file:String;
     messageHeader.append('Content-Type', 'application/json' );
-    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userToken'));
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    
+    const url = 'https://gameserver.centic.ovh/files';
+    //const url= 'https://gameserver.centic.ovh/items/5a9ea8f554e2dd3f09a16e69'
 
      let messageBody = {
       "publish": false,
@@ -75,7 +81,12 @@ export class ApiConectionService {
     this.http.put(Parametros).subscribe( info => {
     })
     */
-    return "url devuelta por la petición";
+console.log(url, messageBody, messageHeader);
+    this.http.put(url,JSON.stringify(messageBody),{headers: messageHeader}).subscribe((reciveServidor)=>{
+      file =reciveServidor.toString();
+      console.log(file);
+    });
+    return file;
   }
 
 }
