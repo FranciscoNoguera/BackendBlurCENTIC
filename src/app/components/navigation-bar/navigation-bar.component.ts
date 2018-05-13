@@ -21,4 +21,8 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigateByUrl('upload_image');
   }
 
+  redirectToNewCard(){
+    this.router.navigateByUrl('new_card');
+  }
+
 }

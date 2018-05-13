@@ -1,12 +1,9 @@
 <app-navigation-bar></app-navigation-bar>
 <div class="login-page">
     <div class="form">
-        <input type="text" placeholder="Nombre imágen" name="name" [(ngModel)]="name"/>
-        
-        <input type = "file" name= "imageFile" file-model = "myFile"/>
-        <button (click) = "uploadImage(imageFile)">
+        <input type="file" (change)="onSelection($event)" />
+        <button (click) = "uploadImage()">
             <span class="glyphicon glyphicon-circle-arrow-up"></span> Subir Imagen
         </button>
     </div>
 </div>
-

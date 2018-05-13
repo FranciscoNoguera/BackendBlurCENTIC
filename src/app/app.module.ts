@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,7 +11,8 @@ import { ApiConectionService } from './services/ApiConectionService/api-conectio
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
-import { HomeComponent } from './components/home/home.component';
+import { CreateGameItemComponent } from './components/create-game-item/create-game-item.component';
+import {HomeComponent} from './components/home/home.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 
@@ -21,6 +22,7 @@ import { ROUTES } from './app.routing';
     FormLoginComponent,
     UploadImageComponent,
     NavigationBarComponent,
+    CreateGameItemComponent,
     HomeComponent
   ],
   imports: [

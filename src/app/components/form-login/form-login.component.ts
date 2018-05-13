@@ -32,8 +32,6 @@ export class FormLoginComponent implements OnInit {
     Tras esto redirigirá al menú de gestión.
     */
     this.apiConectionService.logIn( this.user, this.password );
-    if( this.apiConectionService.isLoggedIn() == false ){
-      this.logInState = false;
-    }
+    this.apiConectionService.isLoggedIn();
   }
 }

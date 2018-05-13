@@ -27,9 +27,10 @@ export class ApiConectionService {
     .map(response => response.json()).subscribe( info => {
         console.log("Token:", info);
         localStorage.setItem('userTokenBlurCentic', info ['token']);
-      });
-      //Llevar a la página de control.
-      this.router.navigateByUrl('home');
+      }, err => {
+        console.log("An error ocurred");
+      }
+    );
   }
 
   isLoggedIn() {
@@ -38,12 +39,10 @@ export class ApiConectionService {
     devolverá true. En caso negativo false y redirigirá a la página de registro.
     */
     if(localStorage.getItem('userTokenBlurCentic')) {
-      return true;
-    } else {
-      //Devolver a la página de logIn no se ha impementado todavía.
-      return false;
+      this.router.navigateByUrl('home');
+      return;
     }
-
+    this.router.navigateByUrl('login');
   }
 
   logOut(): void {
@@ -54,42 +53,13 @@ export class ApiConectionService {
      localStorage.removeItem('userTokenBlurCentic');
   }
 
-  uploadImage(imageName: String): String {
-
-    let messageHeader = new Headers();
-    let file:String;
-    messageHeader.append('Content-Type', 'application/json' );
-    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
-    
-    const url = 'https://gameserver.centic.ovh/files';
-    //const url= 'https://gameserver.centic.ovh/items/5a9ea8f554e2dd3f09a16e69'
-
-     let messageBody = {
-      "publish": false,
-      "name": imageName
-    }
-
-//La petición que tenéis que usar es Put Item la tenéis descrita en el Postman
-//He dejado ya terinados la cabecera y el cuerpo del mensaje.
-//Esta petición devuelve una URL que teneís que recoger y de la que se debe de hacer un return.
-//También será necesario que le suministreis la imágen por parámetro a la función. Y es posible que para subirla al api tengais que convertirla a texto.
-//Buscad en google "Upload image to a restful api" y saldrá mucha documentación
-
-    /* Esto es un ejemplo de como se tiene que hacer la petición
-    this.http.post( 'https://gameserver.centic.ovh/games/items/', JSON.stringify(messageBody), { headers: messageHeader })
-    .subscribe( info => {
-      console.log(info);
-    });
-    En este caso tendreis que hacer un put, por lo que será algo más así
-    this.http.put(Parametros).subscribe( info => {
-    })
+  uploadFile(file: FormData){
+    /*
+    Esta función sube un fichero al Api.
     */
-console.log(url, messageBody, messageHeader);
-    this.http.put(url,JSON.stringify(messageBody),{headers: messageHeader}).subscribe((reciveServidor)=>{
-      file =reciveServidor.toString();
-      console.log(file);
-    });
-    return file;
+    let messageHeader = new Headers();
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    return this.http.post('https://gameserver.centic.ovh/files', file, {headers: messageHeader});
   }
 
 }
