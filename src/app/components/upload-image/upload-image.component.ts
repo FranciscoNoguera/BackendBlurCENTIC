@@ -21,7 +21,7 @@ export class UploadImageComponent implements OnInit {
   }
 
   onSelection(event){
-    this.selectedFile = <File> event.target.files;
+    this.selectedFile = <File> event.target.files[0];
   }
 
   uploadImage(){
