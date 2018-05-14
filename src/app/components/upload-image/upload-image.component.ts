@@ -28,7 +28,9 @@ export class UploadImageComponent implements OnInit {
     const file = new FormData();
     file.append('file',this.selectedFile ,this.selectedFile.name);
     this.apiConnection.uploadFile(file).subscribe(data => {
-      this.url = data['file'];
+      console.log("Datos", data);
+      
+      this.url = "https://gameserver.centic.ovh" + data['file'];
     }), err => {
       console.log(err);
     }
