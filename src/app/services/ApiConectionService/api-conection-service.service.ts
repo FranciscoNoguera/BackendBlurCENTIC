@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
+import { Card } from './../../interfaces/Card';
 
 @Injectable()
 export class ApiConectionService {
@@ -55,11 +56,38 @@ export class ApiConectionService {
 
   uploadFile(file: FormData){
     /*
-    Esta función sube un fichero al Api.
+    Esta función sube un fichero (imágen) al Api.
     */
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
     return this.http.post('https://gameserver.centic.ovh/files', file, {headers: messageHeader});
   }
+
+  uploadCard(id: string, time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
+    /*
+    Esta función sube una tarjeta al Api
+    */
+    let messageHeader = new Headers();
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    let card: Card = {
+      "id": id,
+      "time": time,
+      "clue": clue,
+      "solution": solution,
+      "letters": letters,
+      "imageURL": imageURL,
+      "publish": publish
+    };
+    return this.http.post('https://gameserver.centic.ovh/files', JSON.stringify(card),{headers: messageHeader});
+  }
+
+  //getAllCards(){
+    /*
+    Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
+    *//*
+    let messageHeader = new Headers();
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    return this.http.get<Card[]>('https://gameserver.centic.ovh/items',{headers: messageHeader});
+  }*/
 
 }

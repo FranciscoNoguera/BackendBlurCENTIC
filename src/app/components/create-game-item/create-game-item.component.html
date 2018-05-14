@@ -56,7 +56,8 @@
                       </label>
                   </div>
               </div>
-                <button type="button" class="btn btn-outline btn-primary btn-lg btn-block">Publicar</button>
+                <p> {{errorMessage}} </p>
+                <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" (click)="onSubmit()">Publicar</button>
               </form>
             </div>
           </div>
