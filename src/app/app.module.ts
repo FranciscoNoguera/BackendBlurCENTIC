@@ -10,10 +10,10 @@ import { Ng2ImgToolsModule } from 'ng2-img-tools';
 import { ApiConectionService } from './services/ApiConectionService/api-conection-service.service';
 /*Componentes*/
 import { FormLoginComponent } from './components/form-login/form-login.component';
-import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { NavigationBarComponent } from './components/navigation-bar/navigation-bar.component';
 import { CreateGameItemComponent } from './components/create-game-item/create-game-item.component';
 import {HomeComponent} from './components/home/home.component';
+import { ListCardsComponent } from './components/list-cards/list-cards.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 
@@ -21,10 +21,10 @@ import { ROUTES } from './app.routing';
   declarations: [
     AppComponent,
     FormLoginComponent,
-    UploadImageComponent,
     NavigationBarComponent,
     CreateGameItemComponent,
-    HomeComponent
+    HomeComponent,
+    ListCardsComponent
   ],
   imports: [
     BrowserModule,

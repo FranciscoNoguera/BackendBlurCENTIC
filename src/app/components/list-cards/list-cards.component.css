@@ -1,0 +1,14 @@
+img {
+    float: left;
+    height: 150px;
+    widows: 150px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.box {
+    height: 180px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-right: 15px;
+}

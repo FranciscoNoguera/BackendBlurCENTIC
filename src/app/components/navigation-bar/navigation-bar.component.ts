@@ -1,3 +1,4 @@
+import { ApiConectionService } from './../../services/ApiConectionService/api-conection-service.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigationBarComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,private apiConectionService: ApiConectionService) { }
 
   ngOnInit() {
   }
@@ -17,12 +18,17 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigateByUrl('home');
   }
 
-  redirectToUploadImage(){
-    this.router.navigateByUrl('upload_image');
+  redirectToListCards(){
+    this.router.navigateByUrl('list_cards');
   }
 
   redirectToNewCard(){
     this.router.navigateByUrl('new_card');
+  }
+
+  closeSession(){
+    this.apiConectionService.logOut();
+    this.router.navigateByUrl('login');
   }
 
 }

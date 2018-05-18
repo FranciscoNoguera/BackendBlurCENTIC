@@ -80,13 +80,13 @@ export class ApiConectionService {
     return this.http.post('https://gameserver.centic.ovh/items', JSON.stringify(card),{headers: messageHeader});
   }
 
-  //getAllCards(){
+  getAllCards(){
     /*
     Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
     *//*
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
     return this.http.get<Card[]>('https://gameserver.centic.ovh/items',{headers: messageHeader});
-  }*/
+  */}
 
 }
