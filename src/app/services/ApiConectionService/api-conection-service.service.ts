@@ -26,7 +26,6 @@ export class ApiConectionService {
 
     this.http.post('https://gameserver.centic.ovh/auth/login', messageBody, { headers: messageHeader })
     .map(response => response.json()).subscribe( info => {
-        console.log("Token:", info);
         localStorage.setItem('userTokenBlurCentic', info ['token']);
       }, err => {
         console.log("An error ocurred");
@@ -69,6 +68,7 @@ export class ApiConectionService {
     */
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    messageHeader.append( 'Content-Type', 'application/json' );
     let card: Card = {
       "id": id,
       "time": time,
@@ -81,13 +81,13 @@ export class ApiConectionService {
     return this.http.post('https://gameserver.centic.ovh/files', JSON.stringify(card),{headers: messageHeader});
   }
 
-  //getAllCards(){
+  getAllCards(){
     /*
     Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
-    *//*
+    */
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
     return this.http.get<Card[]>('https://gameserver.centic.ovh/items',{headers: messageHeader});
-  }*/
+  }
 
 }

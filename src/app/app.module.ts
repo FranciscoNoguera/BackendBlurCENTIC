@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { Ng2ImgToolsModule } from 'ng2-img-tools';
 /*Servicios*/
 import { ApiConectionService } from './services/ApiConectionService/api-conection-service.service';
 /*Componentes*/
@@ -29,7 +30,8 @@ import { ROUTES } from './app.routing';
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    Ng2ImgToolsModule
   ],
   providers: [
     ApiConectionService

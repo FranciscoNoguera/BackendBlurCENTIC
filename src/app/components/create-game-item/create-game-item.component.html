@@ -31,28 +31,36 @@
                   <input class="form-control" type="text" name="solution" [(ngModel)]="solution" >
                 </div>
                 <div class="form-group">
-                  <label>Letras del teclado</label>
-                  <input class="form-control" type="text" name="letters" [(ngModel)]="letters" >
-                  <p class="help-block">Este campo debe contener la solución de la tarjeta mas las letras estra qu se quieran añadir al teclado para dificultar la resolución de la tarjeta.</p>
+                  <label>Letras extra</label>
+                  <input class="form-control" type="text" name="letters" [(ngModel)]="extraLetters" >
+                  <p class="help-block">Este campo es opcional.</p>
+                  <p class="help-block">Usar en caso de que se desee añadir letras extra a la solución para auentar la dificultad.</p>
                 </div>
+              </form>
+            </div>
+            
+            <div class="col-lg-6">
+              <form role="form">
+
                 <div class="form-group">
                   <label>Pista de la tarjeta</label>
                   <input class="form-control" type="text" name="clue" [(ngModel)]="clue" >
                 </div>
-				<div class="form-group">
-					<label>Imágen</label>
-					<input type="file">
-				</div>
+                <div class="form-group">
+                  <label>Imágen</label>
+                  <input type="file" (change)="onSelection($event)">
+                  <img src="{{displayURL}}" alt="">
+                </div>
                 <div class="form-group">
                   <label>Publicar</label>
                   <div class="radio">
                       <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Publico
+                          <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" [(ngModel)]="publish" [value]="true" >Publico
                       </label>
                   </div>
                   <div class="radio">
                       <label>
-                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Privado
+                          <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked [(ngModel)]="publish" [value]="false" >Privado
                       </label>
                   </div>
               </div>
