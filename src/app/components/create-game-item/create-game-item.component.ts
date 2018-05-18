@@ -15,7 +15,6 @@ import { Ng2ImgToolsService } from 'ng2-img-tools';
   styleUrls: ['./create-game-item.component.css']
 })
 export class CreateGameItemComponent implements OnInit {
-  public id: string;
   public time: number;
   public clue: string;
   public solution: string;
@@ -41,10 +40,10 @@ export class CreateGameItemComponent implements OnInit {
     blanco. En caso afirmativo devuelve true. Si el string cumple estas restricciones devuelve
     false
     */
-    if(this.id === undefined){
+    if(text === undefined){
       return true;
     } else {
-      if(this.id.replace(/\s/g, '').length === 0){
+      if(text.replace(/\s/g, '').length === 0){
         return true;
       }
     }
@@ -75,10 +74,6 @@ export class CreateGameItemComponent implements OnInit {
     Si al final de la ejecución su valor es true se enviará la tarjeta al API.
     */
     let errorCheck: boolean = true;
-    if(this.isStringDefined(this.id)){
-      errorCheck = false;
-      console.log("Id incorrecto");
-    }
     if(this.isStringDefined(this.solution)){
       errorCheck = false;
       console.log("Solución incorrecta");
@@ -103,7 +98,7 @@ export class CreateGameItemComponent implements OnInit {
 
 
     if(errorCheck){
-      this.apiConnectionService.uploadCard(this.id, this.time,this.clue, this.solution, this.solution + this.extraLetters, this.imageURL, this.publish)
+      this.apiConnectionService.uploadCard(this.time,this.clue, this.solution, this.solution + this.extraLetters, this.imageURL, this.publish)
         .subscribe(data => {
           console.log("Retorno: ", data);
         }), err => {
