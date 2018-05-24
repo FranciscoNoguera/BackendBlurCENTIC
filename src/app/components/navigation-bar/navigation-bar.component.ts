@@ -15,15 +15,15 @@ export class NavigationBarComponent implements OnInit {
   }
 
   redirectToHome(){
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('home/main');
   }
 
   redirectToListCards(){
-    this.router.navigateByUrl('list_cards');
+    this.router.navigateByUrl('home/list_cards');
   }
 
   redirectToNewCard(){
-    this.router.navigateByUrl('new_card');
+    this.router.navigateByUrl('home/new_card');
   }
 
   closeSession(){

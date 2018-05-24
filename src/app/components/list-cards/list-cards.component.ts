@@ -17,6 +17,7 @@ export class ListCardsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.apiConectionService.getAllCards());
   }
 
 }

@@ -4,11 +4,14 @@
  * @version 1.0
  */
 import { Injectable, NgModule } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+//import { Observable } from 'rxjs/Observable';
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
+//import 'rxjs/add/operator/catch';
 import { Card } from './../../interfaces/Card';
+
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class ApiConectionService {
@@ -25,12 +28,7 @@ export class ApiConectionService {
     let messageBody = JSON.stringify(credentials);
 
     this.http.post('https://gameserver.centic.ovh/auth/login', messageBody, { headers: messageHeader })
-    .map(response => response.json()).subscribe( info => {
-        localStorage.setItem('userTokenBlurCentic', info ['token']);
-      }, err => {
-        console.log("An error ocurred");
-      }
-    );
+    .map(response => response.json()).catch(this.handleErrors);
   }
 
   isLoggedIn() {
@@ -83,10 +81,16 @@ export class ApiConectionService {
   getAllCards(){
     /*
     Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
-    *//*
+    */
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
-    return this.http.get<Card[]>('https://gameserver.centic.ovh/items',{headers: messageHeader});
-  */}
+    
+    return this.http.get('https://gameserver.centic.ovh/items',{headers: messageHeader})
+      .map(data => data.json()).catch(this.handleErrors);
+  }
+
+  handleErrors(error: Response) {
+    return Observable.throw(error);
+  }
 
 }

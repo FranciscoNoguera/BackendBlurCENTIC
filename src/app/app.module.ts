@@ -14,6 +14,7 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { CreateGameItemComponent } from './components/create-game-item/create-game-item.component';
 import {HomeComponent} from './components/home/home.component';
 import { ListCardsComponent } from './components/list-cards/list-cards.component';
+import { MainComponent } from './components/main/main.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 
@@ -24,7 +25,8 @@ import { ROUTES } from './app.routing';
     NavigationBarComponent,
     CreateGameItemComponent,
     HomeComponent,
-    ListCardsComponent
+    ListCardsComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
