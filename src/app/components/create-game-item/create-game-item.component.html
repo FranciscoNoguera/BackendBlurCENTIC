@@ -58,11 +58,16 @@
                       </label>
                   </div>
               </div>
-                <p> {{errorMessage}} </p>
                 <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" (click)="onSubmit()">Publicar</button>
               </form>
             </div>
           </div>
+          <div *ngIf="success">
+              <br>
+              <div class="alert alert-success">
+                <p>Tarjeta creada con exito</p>
+              </div>
+            </div>
         </div>
       </div>
     </div>

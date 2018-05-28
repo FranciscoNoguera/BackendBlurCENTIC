@@ -1,0 +1,51 @@
+<!--<div id="page-wrapper">
+  <button (click)="eliminarTest()">
+    Test eliminar
+  </button>
+
+</div>-->
+
+<div id="page-wrapper">
+  <div class="row">
+      <div class="col-lg-12">
+          <h1 class="page-header">Eliminar tarjeta de juego</h1>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          Campos:
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <form role="form">
+                <div class="form-group">
+                  <label>Introduzca el Id del elemento a eliminar.</label>
+                  <input class="form-control"  type="string" name="id" [(ngModel)]="id" >
+                </div>
+              </form>
+              <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar</button>
+
+              <!--<div *ngIf="enviado">
+                <div *ngIf="!error">
+                  <br>
+                  <div class="alert alert-danger">
+                      <p>Ocurrió un error, ni existe una tarjeta con ese Id</p>
+                  </div>
+                </div>
+                <div *ngIf="error">
+                  <br>
+                  <div class="alert alert-success">
+                    <p>Tarjeta eliminada con exito</p>
+                  </div>
+                </div>
+              </div>-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

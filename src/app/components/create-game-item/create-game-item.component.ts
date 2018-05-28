@@ -23,7 +23,7 @@ export class CreateGameItemComponent implements OnInit {
   public publish: boolean;
 
   public displayURL: string;
-  //public errorMessage: string = '';
+  public success: boolean = false;
   public selectedFile: File;
   private isImageNotSet: boolean = true;
   
@@ -89,6 +89,9 @@ export class CreateGameItemComponent implements OnInit {
     if(this.isStringDefined(this.solution)){
       this.solution = '';
     }
+    if(this.isStringDefined(this.extraLetters)){
+      this.extraLetters = '';
+    }
     if(this.time === undefined || this.time === null){ //Si time no se encuentra definido o carece de valor se le asigna 60
       this.time = 60;
     }
@@ -96,14 +99,15 @@ export class CreateGameItemComponent implements OnInit {
       this.publish = false;
     }
 
-
+    this.success = false;
     if(errorCheck){
       this.apiConnectionService.uploadCard(this.time,this.clue, this.solution, this.solution + this.extraLetters, this.imageURL, this.publish)
         .subscribe(data => {
           console.log("Retorno: ", data);
         }), err => {
           console.log(err);
-        }
+        };
+      this.success = true;
     }
   }
 

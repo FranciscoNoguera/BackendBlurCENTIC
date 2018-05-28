@@ -15,6 +15,7 @@ import { CreateGameItemComponent } from './components/create-game-item/create-ga
 import {HomeComponent} from './components/home/home.component';
 import { ListCardsComponent } from './components/list-cards/list-cards.component';
 import { MainComponent } from './components/main/main.component';
+import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 
@@ -26,7 +27,8 @@ import { ROUTES } from './app.routing';
     CreateGameItemComponent,
     HomeComponent,
     ListCardsComponent,
-    MainComponent
+    MainComponent,
+    DeleteByIdComponent
   ],
   imports: [
     BrowserModule,
