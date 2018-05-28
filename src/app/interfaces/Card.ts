@@ -5,7 +5,7 @@ export interface Card {
      * @author Francisco Noguera Fuentes
      * @version 1.0
      */
-   // id: string;
+    _id: string;
     time: number; //Este parámetro contiene el tiempo máximo para resolver la tarjeta.
     clue: string; //Contiene la pista de la tarjeta.
     solution: string; //Contiene la solución de la tarjeta.

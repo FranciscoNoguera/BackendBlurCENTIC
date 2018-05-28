@@ -22,8 +22,9 @@ export class ListCardsComponent implements OnInit {
 
   createArrayItems(){
     console.log("Ejecutando función");
-    this.apiConectionService.getAllCards();
-      
+    var cards: Card[] = this.apiConectionService.getAllCards();
+    //console.log("Desde el componente");
+    //console.log(cards);
     
   }
 

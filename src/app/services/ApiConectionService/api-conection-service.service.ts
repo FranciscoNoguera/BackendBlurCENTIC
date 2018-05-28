@@ -100,39 +100,31 @@ export class ApiConectionService {
       };
   }
 
-  getAllCards(){
+  getAllCards(): Card[]{
     /*
     Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
     */
+    var cards: Card[] = [];
     let messageHeader = new Headers();
     messageHeader.append( 'Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
 
-    console.log("Token de usuario", localStorage.getItem('userTokenBlurCentic'));
-    console.log("Ejecutando conexión API");
-    //return this.http.get<Card[]>(ITEMS_URL,{headers: messageHeader});
-    this.http.get(ITEMS_URL,{headers: messageHeader})
-      .map(data => data.json).catch(this.handleErrors).subscribe(info =>{
-        console.log("Info = ", info);
-        console.log("Info = ", info[0]);
-        /*for(let i=0; i<info.length; i++){
-          console.log("Datos ", i, ": ", info[i]);
-        }*/
-      });
-
-      /*this.http.post(LOGIN_URL, messageBody, { headers: messageHeader })
-      .map(response => response.json()).catch(this.handleErrors).subscribe(info => {
-        //console.log("Token:", info);
-        localStorage.setItem('userTokenBlurCentic', info ['token']);
-      });*/
-      /*this.apiConectionService.getAllCards().subscribe(data => {
-      for(let i=0; i<data.length; i++){
-        if(data[i].itemType=="0"){
-          this.cards.push(data[i]);
-          console.log("Data: ",data[i]);
+    this.http.get(ITEMS_URL,{headers: messageHeader}).catch(this.handleErrors).subscribe(info =>{
+      var aux = JSON.parse(info['_body']);
+      for(let i=0; i<aux.length; i++){
+        var card: Card = {
+          "_id": aux[i]['_id'],
+          "time": aux[i]['time'],
+          "clue": aux[i]['clue'],
+          "solution": aux[i]['solution'],
+          "letters": aux[i]['letters'],
+          "imageURL": aux[i]['imageURL'],
+          "publish": aux[i]['publish']
         }
-      }*/
-
+        cards.push(card);
+      }
+    });
+    return cards;
   }
 
   handleErrors(error: Response) {
