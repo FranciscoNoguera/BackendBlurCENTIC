@@ -8,23 +8,20 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <div>
-
-      <div class="panel panel-default">
-        <div class="panel-heading">
-            <b>ID:</b> 
+        <div class=" col-lg-6" *ngFor="let card of cards">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>ID: {{card._id}}</b> 
+                </div>
+                <div class="box">
+                  <img src="{{card.imageURL}}" alt="{{altImageURL}}">
+                  <p><b>Pista:</b> {{card.clue}}</p>
+                  <p><b>Tiempo de resolución:</b> {{card.time}}s</p>
+                  <p><b>Solución:</b> {{card.solution}}</p>
+                  <p><b>Letras del teclado:</b> {{card.letters}}</p>
+                  <p><b>Publicar:</b> {{card.publish}}</p>
+              </div> 
         </div>
-        <div class="box">
-          <img src="{{imageURL}}" alt="">
-          <p><b>Pista:</b> </p>
-          <p><b>Tiempo de resolución:</b> s</p>
-          <p><b>Solución:</b> </p>
-          <p><b>Letras del teclado:</b> </p>
-          <p><b>Publicar:</b> </p>
-      </div>     
-
-    </div>
-
 
     </div>
   </div>

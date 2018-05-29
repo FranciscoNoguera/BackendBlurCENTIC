@@ -8,12 +8,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-cards.component.css']
 })
 export class ListCardsComponent implements OnInit {
-  public cards: Card[];
-
-  public imageURL: string = "../../../assets/images/imgNotFound.png";
+  public cards: Card[] = [];
+  public altImageURL: string = "../../../assets/images/imgNotFound.png";
 
   constructor(private apiConectionService: ApiConectionService) {
-    //this.cards = this.apiConectionService.getAllCards();
   }
 
   ngOnInit() {
@@ -21,11 +19,7 @@ export class ListCardsComponent implements OnInit {
   }
 
   createArrayItems(){
-    console.log("Ejecutando función");
-    var cards: Card[] = this.apiConectionService.getAllCards();
-    //console.log("Desde el componente");
-    //console.log(cards);
-    
+    this.cards = this.apiConectionService.getAllCards();
   }
 
 }

@@ -13,6 +13,7 @@ import { Card } from './../../interfaces/Card';
 import { ITEMS_URL } from './../../app.constants';
 import { FILES_URL } from './../../app.constants';
 import { LOGIN_URL } from './../../app.constants';
+import { BASE_URL } from './../../app.constants';
 
 @Injectable()
 export class ApiConectionService {
@@ -118,7 +119,7 @@ export class ApiConectionService {
           "clue": aux[i]['clue'],
           "solution": aux[i]['solution'],
           "letters": aux[i]['letters'],
-          "imageURL": aux[i]['imageURL'],
+          "imageURL": BASE_URL + aux[i]['imageURL'],
           "publish": aux[i]['publish']
         }
         cards.push(card);
