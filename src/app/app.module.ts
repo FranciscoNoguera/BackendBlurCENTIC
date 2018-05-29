@@ -16,6 +16,7 @@ import {HomeComponent} from './components/home/home.component';
 import { ListCardsComponent } from './components/list-cards/list-cards.component';
 import { MainComponent } from './components/main/main.component';
 import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.component';
+import { EditComponent } from './components/edit/edit.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 
@@ -28,7 +29,8 @@ import { ROUTES } from './app.routing';
     HomeComponent,
     ListCardsComponent,
     MainComponent,
-    DeleteByIdComponent
+    DeleteByIdComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

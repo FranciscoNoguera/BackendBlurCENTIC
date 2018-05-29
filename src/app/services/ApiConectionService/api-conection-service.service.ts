@@ -13,7 +13,6 @@ import { Card } from './../../interfaces/Card';
 import { ITEMS_URL } from './../../app.constants';
 import { FILES_URL } from './../../app.constants';
 import { LOGIN_URL } from './../../app.constants';
-import { BASE_URL } from './../../app.constants';
 
 @Injectable()
 export class ApiConectionService {
@@ -75,6 +74,7 @@ export class ApiConectionService {
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
     messageHeader.append( 'Content-Type', 'application/json' );
     let card: Card = {
+      "_id": '',
       "time": time,
       "clue": clue,
       "solution": solution,
@@ -119,13 +119,35 @@ export class ApiConectionService {
           "clue": aux[i]['clue'],
           "solution": aux[i]['solution'],
           "letters": aux[i]['letters'],
-          "imageURL": BASE_URL + aux[i]['imageURL'],
+          "imageURL": aux[i]['imageURL'],
           "publish": aux[i]['publish']
         }
         cards.push(card);
       }
     });
     return cards;
+  }
+
+  updateCard(_id: string, time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
+
+    let messageHeader = new Headers();
+    messageHeader.append( 'Content-Type', 'application/json' );
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+
+    let card: Card = {
+      "_id": _id,
+      "time": time,
+      "clue": clue,
+      "solution": solution,
+      "letters": letters,
+      "imageURL": imageURL,
+      "publish": publish
+    };
+    this.http.put(ITEMS_URL + '/' + _id, JSON.stringify(card),{headers: messageHeader}).catch(this.handleErrors).subscribe(data => {
+      console.log(data);
+    }), err => {
+      console.log(err);
+    };
   }
 
   handleErrors(error: Response) {

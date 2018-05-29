@@ -26,10 +26,6 @@ export class NavigationBarComponent implements OnInit {
     this.router.navigateByUrl('home/new_card');
   }
 
-  redirectToDeleteById(){
-    this.router.navigateByUrl('home/delete-by-id');
-  }
-
   closeSession(){
     this.apiConectionService.logOut();
     this.router.navigateByUrl('login');

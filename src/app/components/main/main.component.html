@@ -8,14 +8,14 @@
 <div class="row">
   <div class="panel-body">
     <div class="col-lg-6 box">
-      <div class="alert alert-success">
+      <div class="alert alert-success" (click)="redirectToNewCard()">
         <h3>Crear una nueva tarjeta</h3>
         <span class="glyphicon glyphicon-plus"></span>
         <br>
       </div>
     </div>
     <div class="col-lg-6 box">
-      <div class="alert alert-info">
+      <div class="alert alert-info" (click)="redirectToListCards()">
         <h3>Consultar las tarjetas del juego</h3>
         <span class="glyphicon glyphicon-search"></span>
         <br>
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="col-lg-6 box">
-      <div class="alert alert-danger">
+      <div class="alert alert-danger" (click)="redirectToDeleteById()">
         <h3>Eliminar una tarjeta</h3>
         <span class="glyphicon glyphicon-trash"></span>
         <br>
