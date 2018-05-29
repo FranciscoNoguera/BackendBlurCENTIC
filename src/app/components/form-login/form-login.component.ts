@@ -14,13 +14,11 @@ import {Observable} from 'rxjs/Rx';
   styleUrls: ['./form-login.component.css']
 })
 export class FormLoginComponent implements OnInit {
-  //En nuestro caso para conectarnos usaremos ucam1 & zvfMm37
   public user;
   public password;
   public logInState: boolean = true;
 
   constructor( private apiConectionService: ApiConectionService ) { }
-  //constructor( private router: Router, private apiConectionService: ApiConectionService ) { }
 
   ngOnInit() {
   }

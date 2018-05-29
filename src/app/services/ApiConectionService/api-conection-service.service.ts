@@ -30,7 +30,6 @@ export class ApiConectionService {
 
     this.http.post(LOGIN_URL, messageBody, { headers: messageHeader })
     .map(response => response.json()).catch(this.handleErrors).subscribe(info => {
-      //console.log("Token:", info);
       localStorage.setItem('userTokenBlurCentic', info ['token']);
     });
     this.isLoggedIn();
@@ -129,7 +128,9 @@ export class ApiConectionService {
   }
 
   updateCard(_id: string, time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
-
+    /*
+    Esta función modifica los datos de una tarjeta que previamente se haya subido al Api.
+    */
     let messageHeader = new Headers();
     messageHeader.append( 'Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
@@ -151,6 +152,9 @@ export class ApiConectionService {
   }
 
   handleErrors(error: Response) {
+    /*
+    Esta función maneja los errores producidos durante la comunicación.
+    */
     return Observable.throw(error);
   }
 

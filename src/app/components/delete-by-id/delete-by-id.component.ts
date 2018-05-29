@@ -1,3 +1,8 @@
+/**
+ * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * @author Francisco Noguera Fuentes
+ * @version 1.0
+ */
 import { Router } from '@angular/router';
 import { Card } from './../../interfaces/Card';
 import { ApiConectionService } from './../../services/ApiConectionService/api-conection-service.service';
@@ -10,8 +15,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeleteByIdComponent implements OnInit {
   id: string;
-  //enviado: boolean = false;
-  //error: boolean = false;
 
   constructor(private apiConectionService: ApiConectionService, private router: Router ) { }
 
@@ -19,8 +22,9 @@ export class DeleteByIdComponent implements OnInit {
   }
 
   eliminar(){
-    //this.error = this.apiConectionService.removeCard(this.id);
-    //this.enviado = true;
+    /*
+    Esta función elimina la tarjeta seleccionada.
+    */
     this.apiConectionService.removeCard(this.id);
     this.router.navigateByUrl('home/list_cards');
   }

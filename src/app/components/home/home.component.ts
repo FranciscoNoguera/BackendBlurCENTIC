@@ -1,3 +1,8 @@
+/**
+ * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * @author Francisco Noguera Fuentes
+ * @version 1.0
+ */
 import { Component, OnInit } from '@angular/core';
 
 @Component({

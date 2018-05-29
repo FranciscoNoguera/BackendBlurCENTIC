@@ -1,3 +1,8 @@
+/**
+ * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * @author Francisco Noguera Fuentes
+ * @version 1.0
+ */
 import { ApiConectionService } from './../../services/ApiConectionService/api-conection-service.service';
 import { Card } from './../../interfaces/Card';
 import { Component, OnInit, NgModule } from '@angular/core';
@@ -109,6 +114,13 @@ export class CreateGameItemComponent implements OnInit {
         };
       this.success = true;
     }
+  }
+
+  refresh(){
+    /*
+    Esta función refresca la página.
+    */
+    window.location.reload();
   }
 
 

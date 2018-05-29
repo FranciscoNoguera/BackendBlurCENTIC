@@ -3,3 +3,7 @@ img {
     widows: 150px;
     padding-top: 15px;
 }
+
+.btn-warning{
+float: right;
+}
