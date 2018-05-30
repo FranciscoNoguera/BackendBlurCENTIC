@@ -1,3 +1,4 @@
+import { AuthGuard } from './app.security';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -9,7 +10,7 @@ import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.comp
 
 export const ROUTES: Routes = [
     {path: 'login', component: FormLoginComponent},
-    {path: 'home', component: HomeComponent, children:[
+    {path: 'home', component: HomeComponent, canActivate: [AuthGuard], children:[
         {path: 'main', component: MainComponent},
         {path: 'new_card', component: CreateGameItemComponent},
         {path: 'list_cards', component: ListCardsComponent},
