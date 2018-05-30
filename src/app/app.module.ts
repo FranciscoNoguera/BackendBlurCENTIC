@@ -18,6 +18,7 @@ import { MainComponent } from './components/main/main.component';
 import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
+import { AuthGuard } from './app.security';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ROUTES } from './app.routing';
     Ng2ImgToolsModule
   ],
   providers: [
-    ApiConectionService
+    ApiConectionService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
