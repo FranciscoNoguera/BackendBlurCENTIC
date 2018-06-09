@@ -1,5 +1,5 @@
 /**
- * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * Este componente permite eliminar mediante el uso de un Id una tajeta almacenada en el API de CENTIC
  * @author Francisco Noguera Fuentes
  * @version 1.0
  */

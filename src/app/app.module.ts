@@ -16,6 +16,8 @@ import {HomeComponent} from './components/home/home.component';
 import { ListCardsComponent } from './components/list-cards/list-cards.component';
 import { MainComponent } from './components/main/main.component';
 import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.component';
+import { EditCardComponent } from './components/edit-card/edit-card.component';
+import { ErrorComponent } from './components/error/error.component';
 /*Rutas*/
 import { ROUTES } from './app.routing';
 import { AuthGuard } from './app.security';
@@ -29,7 +31,9 @@ import { AuthGuard } from './app.security';
     HomeComponent,
     ListCardsComponent,
     MainComponent,
-    DeleteByIdComponent
+    DeleteByIdComponent,
+    EditCardComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,

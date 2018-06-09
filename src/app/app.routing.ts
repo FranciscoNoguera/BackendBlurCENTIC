@@ -7,6 +7,8 @@ import { HomeComponent } from './components/home/home.component';
 import { ListCardsComponent } from './components/list-cards/list-cards.component';
 import { MainComponent } from './components/main/main.component';
 import { DeleteByIdComponent } from './components/delete-by-id/delete-by-id.component';
+import { EditCardComponent } from './components/edit-card/edit-card.component';
+import { ErrorComponent } from './components/error/error.component';
 
 export const ROUTES: Routes = [
     {path: 'login', component: FormLoginComponent},
@@ -15,6 +17,8 @@ export const ROUTES: Routes = [
         {path: 'new_card', component: CreateGameItemComponent},
         {path: 'list_cards', component: ListCardsComponent},
         {path: 'delete-by-id', component: DeleteByIdComponent},
+        {path: 'edit-card', component: EditCardComponent},
+        {path: 'error', component: ErrorComponent},
         {path: '', redirectTo: 'main', pathMatch: 'full'},
         {path: '**', redirectTo: 'main', pathMatch: 'full'}
     ]},

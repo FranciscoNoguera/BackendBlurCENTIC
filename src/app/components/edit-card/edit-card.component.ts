@@ -1,5 +1,5 @@
 /**
- * Este componente permite crear una nueva tarjeta de juego y almacenarla en el API de CENTIC
+ * Este componente permite editar una tarjeta de juego
  * @author Francisco Noguera Fuentes
  * @version 1.0
  */
@@ -15,11 +15,13 @@ import { Ng2ImgToolsService } from 'ng2-img-tools';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-game-item',
-  templateUrl: './create-game-item.component.html',
-  styleUrls: ['./create-game-item.component.css']
+  selector: 'app-edit-card',
+  templateUrl: './edit-card.component.html',
+  styleUrls: ['./edit-card.component.css']
 })
-export class CreateGameItemComponent implements OnInit {
+export class EditCardComponent implements OnInit {
+  private _id: string;
+
   public time: number;
   public clue: string;
   public solution: string;
@@ -30,16 +32,27 @@ export class CreateGameItemComponent implements OnInit {
   public displayURL: string;
   public success: boolean = false;
   public selectedFile: File;
-  private isImageNotSet: boolean = true;
-
-  private tickTime: number;
   
+  private tickTime: number;
+
   constructor(private apiConnectionService: ApiConectionService, private crop: Ng2ImgToolsService, private router: Router) {
     setInterval(() => this.tick(), 1000);
   }
 
   ngOnInit() {
-    this.displayURL = "../../../assets/images/imgNotFound.png"
+    this._id = localStorage.getItem('editCardId');
+    localStorage.removeItem('editCardId');
+    this.apiConnectionService.getCard(this._id).subscribe(info => {
+      var aux = JSON.parse(info['_body']);
+      this._id = aux['_id'];
+      this.time = aux['time'];
+      this.clue = aux['clue'];
+      this.solution = aux['solution'];
+      this.extraLetters = aux['letters'];
+      this.imageURL = aux['imageURL'];
+      this.displayURL = BASE_URL + aux['imageURL'];
+      this.publish = aux['publish'];
+    });
   }
 
   isStringDefined(text: string): boolean {
@@ -64,13 +77,12 @@ export class CreateGameItemComponent implements OnInit {
     imageURL en la dirección devuelta por esta
     */
    this.selectedFile = <File> event.target.files[0];
-   this.crop.resize([this.selectedFile], 500, 500).subscribe(croppedImage =>{
+   this.crop.resizeExactCrop([this.selectedFile], 500, 500).subscribe(croppedImage =>{
     const file = new FormData();
     file.append('file',croppedImage ,this.selectedFile.name);
     this.apiConnectionService.uploadFile(file).map(response => response.json()).subscribe(data => {
       this.imageURL = data['file'];
       this.displayURL = BASE_URL + this.imageURL;
-      this.isImageNotSet = false;
     }), err => { this.router.navigateByUrl('home/error'); }
    }), err2 => {  this.router.navigateByUrl('home/error'); }
   }
@@ -90,10 +102,6 @@ export class CreateGameItemComponent implements OnInit {
       errorCheck = false;
       console.log("Pista incorrecta");
     }
-    if(this.isImageNotSet){
-      errorCheck = false;
-      console.log("Se debe suministrar una imágen");
-    }
     if(this.isStringDefined(this.solution)){
       this.solution = '';
     }
@@ -106,34 +114,29 @@ export class CreateGameItemComponent implements OnInit {
     if(this.publish === undefined){ //Si publish no se encuentra definido le asigna el valor false.
       this.publish = false;
     }
-    if(this.solution.length > 7){
-      errorCheck = false;
-      console.log("La solución debe tener 7 caracteres o menos");
-    }
 
     this.success = false;
     if(errorCheck){
-
       let card: Card = {
-        "_id": '',
+        "_id": this._id,
         "time": this.time,
         "clue": this.clue,
         "solution": this.solution.toUpperCase(),
         "imageURL": this.imageURL,
         "publish": this.publish
       };
-
-      this.apiConnectionService.uploadCard(card).subscribe(), err => {
+      this.apiConnectionService.updateCard(card).subscribe(), err => {
         this.router.navigateByUrl('home/error');
       };
-      
-      this.tickTime = 3;
-      this.success = true;
-      this.clearFields();
+        this.tickTime = 3;
+        this.success = true;
     }
   }
 
   private tick(): void{
+    /*
+    Función contedor de tiempo para determinar cuanto tiempo se muestran las alertas.
+    */
     if((this.tickTime > 0) && (this.success)){
       this.tickTime--;
     } else if((this.tickTime <= 0) && (this.success)){
@@ -141,19 +144,4 @@ export class CreateGameItemComponent implements OnInit {
     }
   }
 
-  clearFields(){
-    /*
-    Esta función vacía los campos de la página.
-    */
-    this.time = 60;
-    this.clue = '';
-    this.solution = '';
-    this.extraLetters = '';
-    this.imageURL = '';
-    this.publish = false;
-    
-    this.displayURL =  "../../../assets/images/imgNotFound.png";
-    this.selectedFile = undefined;
-    this.isImageNotSet = true;
-  }
 }

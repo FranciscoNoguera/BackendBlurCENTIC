@@ -10,9 +10,12 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Card } from './../../interfaces/Card';
+import { ITEM_URL } from './../../app.constants';
 import { ITEMS_URL } from './../../app.constants';
 import { FILES_URL } from './../../app.constants';
 import { LOGIN_URL } from './../../app.constants';
+import { CONFIG_URL } from './../../app.constants';
+
 
 @Injectable()
 export class ApiConectionService {
@@ -65,23 +68,15 @@ export class ApiConectionService {
     return this.http.post(FILES_URL, file, {headers: messageHeader});
   }
 
-  uploadCard(time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
+  uploadCard(card: Card){
     /*
     Esta función sube una tarjeta al Api
     */
     let messageHeader = new Headers();
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
     messageHeader.append( 'Content-Type', 'application/json' );
-    let card: Card = {
-      "_id": '',
-      "time": time,
-      "clue": clue,
-      "solution": solution,
-      "letters": letters,
-      "imageURL": imageURL,
-      "publish": publish
-    };
-    return this.http.post(ITEMS_URL, JSON.stringify(card),{headers: messageHeader});
+
+    return this.http.post(ITEMS_URL, JSON.stringify(card),{headers: messageHeader}).catch(this.handleErrors);
   }
 
   removeCard(id: string){
@@ -92,45 +87,66 @@ export class ApiConectionService {
     messageHeader.append( 'Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
 
-    this.http.delete(ITEMS_URL + '/' + id, {headers: messageHeader}).catch(this.handleErrors)//.map(data => data.json).catch(this.handleErrors)
-      .subscribe(info => {
-        console.log(info);
-      }), err => {
-        console.log(err);
-      };
+    return this.http.delete(ITEMS_URL + '/' + id, {headers: messageHeader}).catch(this.handleErrors);
   }
 
-  getAllCards(): Card[]{
+  getAllCards(){
     /*
     Esta función recupera todas las tarjetas del Api. Devuelve un array con estas tarjetas.
     */
-    var cards: Card[] = [];
     let messageHeader = new Headers();
     messageHeader.append( 'Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
 
-    this.http.get(ITEMS_URL,{headers: messageHeader}).catch(this.handleErrors).subscribe(info =>{
-      var aux = JSON.parse(info['_body']);
-      for(let i=0; i<aux.length; i++){
-        var card: Card = {
-          "_id": aux[i]['_id'],
-          "time": aux[i]['time'],
-          "clue": aux[i]['clue'],
-          "solution": aux[i]['solution'],
-          "letters": aux[i]['letters'],
-          "imageURL": aux[i]['imageURL'],
-          "publish": aux[i]['publish']
-        }
-        cards.push(card);
-      }
-    });
-    return cards;
+    return this.http.get(ITEMS_URL, {headers: messageHeader}).catch(this.handleErrors);
   }
 
-  updateCard(_id: string, time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
+  getConfig(){
+    /*
+    Esta función recupera la configuración de la partida del api.
+    */
+   let messageHeader = new Headers();
+   messageHeader.append( 'Content-Type', 'application/json' );
+   messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+
+   return this.http.get(CONFIG_URL, {headers: messageHeader}).catch(this.handleErrors);
+  }
+
+  putConfig(config: string){
+    /*
+    Esta sube una configuración de la partida al api.
+    */
+   let messageHeader = new Headers();
+   messageHeader.append( 'Content-Type', 'application/json' );
+   messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+   var aux = { "id": config }
+   return this.http.put(CONFIG_URL, JSON.stringify(aux), {headers: messageHeader}).catch(this.handleErrors);
+  }
+
+  getCard(_id: string){
+    /*
+    Esta función recupera la configuración del Api
+    */
+    let messageHeader = new Headers();
+    messageHeader.append( 'Content-Type', 'application/json' );
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    return this.http.get(ITEM_URL + _id, {headers: messageHeader}).catch(this.handleErrors);
+  }
+
+  updateCard(card: Card){
     /*
     Esta función modifica los datos de una tarjeta que previamente se haya subido al Api.
     */
+    let messageHeader = new Headers();
+    messageHeader.append( 'Content-Type', 'application/json' );
+    messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
+    return this.http.put(ITEMS_URL + '/' + card._id, JSON.stringify(card),{headers: messageHeader}).catch(this.handleErrors);
+  }
+/*
+  updateCard(_id: string, time: number, clue: string, solution: string, letters: string, imageURL: string, publish: boolean){
+    /*
+    Esta función modifica los datos de una tarjeta que previamente se haya subido al Api.
+    *//*
     let messageHeader = new Headers();
     messageHeader.append( 'Content-Type', 'application/json' );
     messageHeader.append('Authorization',"Bearer " + localStorage.getItem('userTokenBlurCentic'));
@@ -150,6 +166,8 @@ export class ApiConectionService {
       console.log(err);
     };
   }
+*/
+
 
   handleErrors(error: Response) {
     /*

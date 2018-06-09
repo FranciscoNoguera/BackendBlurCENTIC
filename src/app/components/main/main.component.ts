@@ -1,5 +1,5 @@
 /**
- * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * Página de inicio (home)
  * @author Francisco Noguera Fuentes
  * @version 1.0
  */

@@ -1,5 +1,5 @@
 /**
- * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * Este componente no tiene ninguna funcionalidad. Únicamente cuenta, en el html, con la barra de navegación y un router-outlet
  * @author Francisco Noguera Fuentes
  * @version 1.0
  */

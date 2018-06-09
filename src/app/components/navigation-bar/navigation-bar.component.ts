@@ -1,5 +1,5 @@
 /**
- * Este servicio implementa las comunicaciones http con el API de CENTIC
+ * Barra de navegación, implementa la reddirección al resto de componentes
  * @author Francisco Noguera Fuentes
  * @version 1.0
  */
